@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:MiniExcel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Gray">
+        <DockPanel LastChildFill="False" Margin="10,10,190,10" Background="White" Name="ItemContainer"/>
+        <Button x:Name="button" Content="Clear" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_Copy" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_Copy1" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="button_Copy1_Click"/>
+        <Label x:Name="label" Content="Number content
+" HorizontalAlignment="Left" Margin="659,65,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="label_Copy" Content="Text content " HorizontalAlignment="Left" Margin="670,229,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="615,102,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy" Content="Button" HorizontalAlignment="Left" Margin="615,127,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy1" Content="Button" HorizontalAlignment="Left" Margin="615,152,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy2" Content="Button" HorizontalAlignment="Left" Margin="615,177,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy3" Content="Button" HorizontalAlignment="Left" Margin="615,202,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy4" Content="Button" HorizontalAlignment="Left" Margin="615,260,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy5" Content="Button" HorizontalAlignment="Left" Margin="615,285,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy6" Content="Button" HorizontalAlignment="Left" Margin="615,310,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy7" Content="Button" HorizontalAlignment="Left" Margin="615,335,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button1_Copy8" Content="Button" HorizontalAlignment="Left" Margin="615,360,0,0" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="button_Copy2" Content="Row -" HorizontalAlignment="Left" Margin="738,35,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_Copy3" Content="Columne -" HorizontalAlignment="Left" Margin="663,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343"/>
 
     </Grid>
 </Window>
