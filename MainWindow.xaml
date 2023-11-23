@@ -10,13 +10,20 @@
             
 
         <Grid Margin="10,10,190,10" Background="White" x:Name="ItemContainer" ShowGridLines="True" >
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
         </Grid> 
 
         <Button x:Name="button" Content="Clear" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top"/>
 
-        <Button x:Name="btAddRow" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top" Click="btAddRow_Click"/>
-        <Button x:Name="btAddColumne" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="AddColumne"/>
+        <Button x:Name="btAddRow" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top" Click="AddRow"/>
+        <Button x:Name="btAddColumne" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="AddColumn"/>
 
         <Label x:Name="label" Content="Number content
 " HorizontalAlignment="Left" Margin="659,65,0,0" VerticalAlignment="Top" Foreground="White"/>

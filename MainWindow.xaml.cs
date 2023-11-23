@@ -58,43 +58,46 @@ namespace MiniExcel
             popUpWindow.Show();
         }
 
-        private void AddColumne(object sender, RoutedEventArgs e)
+        private void AddColumn(object sender, RoutedEventArgs e)
         {
-            TextBox newTextBox = new TextBox
-            {
-                Width = 30,
-                Height = 30,
-
-            };
-
-
             ColumnDefinition newColumn = new ColumnDefinition();
             ItemContainer.ColumnDefinitions.Add(newColumn);
 
-            Grid.SetColumn(newTextBox, ItemContainer.ColumnDefinitions.Count - 1);
+            for (int i = 0; i < ItemContainer.RowDefinitions.Count; i++)
+            {
+                TextBox newTextBox = new TextBox
+                {
+                    Width = 30,
+                    Height = 30,
+                };
 
-            ItemContainer.Children.Add(newTextBox);
+                Grid.SetColumn(newTextBox, ItemContainer.ColumnDefinitions.Count - 1);
+                Grid.SetRow(newTextBox, i);
+
+                ItemContainer.Children.Add(newTextBox);
+            }
         }
 
-        private void btAddRow_Click(object sender, RoutedEventArgs e)
+        private void AddRow(object sender, RoutedEventArgs e)
         {
-            TextBox newTextBox = new TextBox
-            {
-                Width = 30,
-                Height = 30,
-
-            };
-
-
-
-
             RowDefinition newRowDefinition = new RowDefinition();
             ItemContainer.RowDefinitions.Add(newRowDefinition);
 
-            Grid.SetRow(newTextBox, ItemContainer.RowDefinitions.Count - 1);
+            for (int i = 0; i < ItemContainer.ColumnDefinitions.Count; i++)
+            {
+                TextBox newTextBox = new TextBox
+                {
+                    Width = 30,
+                    Height = 30,
+                };
 
-            ItemContainer.Children.Add(newTextBox);
+                Grid.SetRow(newTextBox, ItemContainer.RowDefinitions.Count - 1);
+                Grid.SetColumn(newTextBox, i);
+
+                ItemContainer.Children.Add(newTextBox);
+            }
         }
+
 
     }
 }
