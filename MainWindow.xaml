@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:MiniExcel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="Gray">
-        <DockPanel LastChildFill="False" Margin="10,10,190,10" Background="White" Name="ItemContainer"/>
+        <Grid Background="Gray">
+            
+
+        <Grid Margin="10,10,190,10" Background="White" x:Name="ItemContainer" ShowGridLines="True" >
+            
+        </Grid> 
+
         <Button x:Name="button" Content="Clear" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_Copy" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_Copy1" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="button_Copy1_Click"/>
-        <Label x:Name="label" Content="Number content
-" HorizontalAlignment="Left" Margin="659,65,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="btAddRow" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top" Click="btAddRow_Click"/>
+        <Button x:Name="btAddColumne" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="AddColumne"/>
+        <Label x:Name="label" Content="Number content " HorizontalAlignment="Left" Margin="659,65,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label x:Name="label_Copy" Content="Text content " HorizontalAlignment="Left" Margin="670,229,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="615,102,0,0" VerticalAlignment="Top" Width="175"/>
         <Button x:Name="button1_Copy" Content="Button" HorizontalAlignment="Left" Margin="615,127,0,0" VerticalAlignment="Top" Width="175"/>
