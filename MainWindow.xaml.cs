@@ -20,11 +20,42 @@ namespace MiniExcel
     /// </summary>
     public partial class MainWindow : Window
     {
+        PopUpWindow popUpWindow;
+
         public MainWindow()
         {
             InitializeComponent();
+            popUpWindow = new PopUpWindow();
         }
 
-       
+        private void sortButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPopUpWindow();
+        }
+
+        private void intFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPopUpWindow();
+        }
+
+        private void intMinValue_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPopUpWindow();
+        }
+
+        private void intAvarageValue_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPopUpWindow();
+        }
+
+        private void intMaxValue_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPopUpWindow();
+        }
+
+        private void ShowPopUpWindow()
+        {
+            popUpWindow.Show();
+        }
     }
 }

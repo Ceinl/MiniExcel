@@ -6,7 +6,9 @@ using System.Text;
 
 public class DataVisualizator {
 
-    public DataVisualizator() {
+    public DataVisualizator()
+    {
+
     }
 
 }
