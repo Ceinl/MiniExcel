@@ -60,10 +60,25 @@ namespace MiniExcel
 
         private void AddColumn(object sender, RoutedEventArgs e)
         {
+            // Додаємо новий стовбець
             ColumnDefinition newColumn = new ColumnDefinition();
             ItemContainer.ColumnDefinitions.Add(newColumn);
 
-            for (int i = 0; i < ItemContainer.RowDefinitions.Count; i++)
+            // Додаємо Label для нумерації стовбців
+            Label headerLabel = new Label
+            {
+                Content = (ItemContainer.ColumnDefinitions.Count - 1).ToString(), // Нумерація з 1
+                Width = 30,
+                Height = 30,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            Grid.SetColumn(headerLabel, ItemContainer.ColumnDefinitions.Count - 1);
+            Grid.SetRow(headerLabel, 0);
+            ItemContainer.Children.Add(headerLabel);
+
+            // Додаємо текстбокси в кожну комірку нового стовбця
+            for (int i = 1; i < ItemContainer.RowDefinitions.Count; i++)
             {
                 TextBox newTextBox = new TextBox
                 {
@@ -80,10 +95,25 @@ namespace MiniExcel
 
         private void AddRow(object sender, RoutedEventArgs e)
         {
+            // Додаємо новий рядок
             RowDefinition newRowDefinition = new RowDefinition();
             ItemContainer.RowDefinitions.Add(newRowDefinition);
 
-            for (int i = 0; i < ItemContainer.ColumnDefinitions.Count; i++)
+            // Додаємо Label для нумерації рядків
+            Label headerLabel = new Label
+            {
+                Content = (ItemContainer.RowDefinitions.Count - 1).ToString(), // Нумерація з 1
+                Width = 30,
+                Height = 30,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            Grid.SetColumn(headerLabel, 0);
+            Grid.SetRow(headerLabel, ItemContainer.RowDefinitions.Count - 1);
+            ItemContainer.Children.Add(headerLabel);
+
+            // Додаємо текстбокси в кожну комірку нового рядка
+            for (int i = 1; i < ItemContainer.ColumnDefinitions.Count; i++)
             {
                 TextBox newTextBox = new TextBox
                 {
@@ -97,6 +127,8 @@ namespace MiniExcel
                 ItemContainer.Children.Add(newTextBox);
             }
         }
+
+
 
 
     }

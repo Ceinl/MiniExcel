@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
         <Grid Background="Gray">
-            
 
-        <Grid Margin="10,10,190,10" Background="White" x:Name="ItemContainer" ShowGridLines="True" >
+
+        <Grid Margin="10,10,190,10" Background="White" x:Name="ItemContainer" ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Додайте цей стовбчик для нумерації стовбців -->
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <!-- Додайте цей рядок для нумерації рядків -->
             </Grid.RowDefinitions>
-        </Grid> 
+        </Grid>
+
 
         <Button x:Name="button" Content="Clear" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top"/>
 
