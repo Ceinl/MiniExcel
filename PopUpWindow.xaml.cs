@@ -30,8 +30,8 @@ namespace MiniExcel
         {
             InitializeComponent();
             SetWindowName();
-            WindowContent(myWindowContent);
-            WindowActon(myWindowAction);
+            //WindowContent(myWindowContent);
+           // WindowActon(myWindowAction);
             Show();
         }
 

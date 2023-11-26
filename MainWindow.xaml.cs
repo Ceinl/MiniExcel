@@ -20,19 +20,14 @@ namespace MiniExcel
     /// </summary>
     public partial class MainWindow : Window
     {
-        PopUpWindow popUpWindow = new PopUpWindow
-        {
-            MyWindowName = " ",
-            myWindowContent = 1,
-            myWindowAction = 1,
-        };
+        
 
         private static TextBox[,] textBoxArray;
 
         public MainWindow()
         {
             InitializeComponent();
-            popUpWindow = new PopUpWindow();
+           // popUpWindow = new PopUpWindow();
             textBoxArray = new TextBox[11,11];
         }
 
@@ -66,8 +61,13 @@ namespace MiniExcel
 
         private void ShowPopUpWindow()
         {
-            popUpWindow.Show();
-            
+            PopUpWindow popUpWindow = new PopUpWindow
+            {
+                MyWindowName = "Тест?",
+                myWindowContent = 1,
+                myWindowAction = 1,
+            };
+
         }
 
         private void AddColumn(object sender, RoutedEventArgs e)
@@ -164,9 +164,10 @@ namespace MiniExcel
             }
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
 
-
-
+        }
     }
 }
 
