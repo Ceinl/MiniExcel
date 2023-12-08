@@ -21,14 +21,47 @@
         </Grid>
 
 
-        <Button x:Name="button" Content="Clear" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top" Click="button_Click"/>
-
-        <Button x:Name="btAddRow" Content="Row +" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top" Click="AddRow"/>
-        <Button x:Name="btAddColumne" Content="Columne +" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343" Click="AddColumn"/>
-
-        <Label x:Name="label" Content="Number content
-" HorizontalAlignment="Left" Margin="659,65,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label x:Name="label_Copy" Content="Text content " HorizontalAlignment="Left" Margin="670,229,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button 
+            x:Name="clearBtn"
+            Content="Clear"
+            HorizontalAlignment="Left"
+            Margin="627,10,0,0"
+            VerticalAlignment="Top"
+            Click="button_Click"
+        />
+        <Button 
+            x:Name="addRowBtn"
+            Content="Row +"
+            HorizontalAlignment="Left"
+            Margin="738,10,0,0" 
+            VerticalAlignment="Top"
+            Click="AddRow"
+        />
+        <Button 
+            x:Name="addColumnBtn" 
+            Content="Column +" 
+            HorizontalAlignment="Left" 
+            Margin="663,10,0,0"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="2.491,1.343"
+            Click="AddColumn"
+        />
+        <Label
+            x:Name="label"
+            Content="Number content" 
+            HorizontalAlignment="Left"
+            Margin="659,65,0,0"
+            VerticalAlignment="Top"
+            Foreground="White"
+        />
+        <Label 
+            x:Name="label_Copy"
+            Content="Text content"
+            HorizontalAlignment="Left"
+            Margin="670,229,0,0"
+            VerticalAlignment="Top"
+            Foreground="White"
+        />
         <Button 
             x:Name="intSortButton"
             Content="Sort"
@@ -74,13 +107,60 @@
             Width="175"
             Click="intMaxValue_Click"
         />
-        <Button x:Name="button1_Copy4" Content="Button" HorizontalAlignment="Left" Margin="615,260,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button x:Name="button1_Copy5" Content="Button" HorizontalAlignment="Left" Margin="615,285,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button x:Name="button1_Copy6" Content="Button" HorizontalAlignment="Left" Margin="615,310,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button x:Name="button1_Copy7" Content="Button" HorizontalAlignment="Left" Margin="615,335,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button x:Name="button1_Copy8" Content="Button" HorizontalAlignment="Left" Margin="615,360,0,0" VerticalAlignment="Top" Width="175"/>
-        <Button x:Name="button_Copy2" Content="Row -" HorizontalAlignment="Left" Margin="738,35,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_Copy3" Content="Columne -" HorizontalAlignment="Left" Margin="663,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.491,1.343"/>
+        <Button
+            x:Name="upperCaseBtn"
+            Content="Upper Case"
+            HorizontalAlignment="Left"
+            Margin="615,260,0,0"
+            VerticalAlignment="Top"
+            Width="175"
+        />
+        <Button 
+            x:Name="lowerCaseBtn"
+            Content="Lower Case"
+            HorizontalAlignment="Left"
+            Margin="615,285,0,0"
+            VerticalAlignment="Top"
+            Width="175"
+        />
+        <Button
+            x:Name="sortAbcBtn"
+            Content="Sort by ABC"
+            HorizontalAlignment="Left"
+            Margin="615,310,0,0"
+            VerticalAlignment="Top"
+            Width="175"
+        />
+        <Button 
+            x:Name="sortLenghtBtn"
+            Content="Sort by lenght"
+            HorizontalAlignment="Left"
+            Margin="615,335,0,0"
+            VerticalAlignment="Top"
+            Width="175"
+        />
+        <Button 
+            x:Name="searchBtn"
+            Content="Search by word"
+            HorizontalAlignment="Left"
+            Margin="615,360,0,0"
+            VerticalAlignment="Top"
+            Width="175"
+        />
+        <Button 
+            x:Name="removeRowBtn"
+            Content="Row - "
+            HorizontalAlignment="Left"
+            Margin="738,35,0,0"
+            VerticalAlignment="Top"
+        />
+        <Button 
+            x:Name="removeColumnBtn"
+            Content="Column - " HorizontalAlignment="Left"
+            Margin="663,35,0,0"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="2.491,1.343"
+        />
 
     </Grid>
 </Window>
