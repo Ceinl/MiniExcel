@@ -11,12 +11,11 @@
             x:Name="confirmButton"
             Content="Ok"
             HorizontalAlignment="Center"
-            Margin="0,362,0,0"
+            Margin="0,343,0,0"
             VerticalAlignment="Top"
             Width="176"
             Click="confirmButton_Click"
         />
-        <Label x:Name="WindowName" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

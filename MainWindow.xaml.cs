@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,43 +32,51 @@ namespace MiniExcel
             textBoxArray = new TextBox[11,11];
         }
 
-        private void SetWindowName() 
-        {
-        }
+      
         private void sortButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPopUpWindow();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.SortContent();
+            popUpWindow.SetEvent(popUpWindow.SortAction);
+            popUpWindow.Show();
         }
 
         private void intFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPopUpWindow();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.FilterContent();
+            popUpWindow.SetEvent(popUpWindow.FilterAction);
+            popUpWindow.Show();
         }
 
         private void intMinValue_Click(object sender, RoutedEventArgs e)
         {
-            ShowPopUpWindow();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.MinContent();
+            popUpWindow.SetEvent(popUpWindow.MinAction);
+            popUpWindow.Show();
         }
 
         private void intAvarageValue_Click(object sender, RoutedEventArgs e)
         {
-            ShowPopUpWindow();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.AvarageContent();
+            popUpWindow.SetEvent(popUpWindow.AvarageAction);
+            popUpWindow.Show();
         }
 
         private void intMaxValue_Click(object sender, RoutedEventArgs e)
         {
-            ShowPopUpWindow();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.MaxContent();
+            popUpWindow.SetEvent(popUpWindow.MaxAction);
+            popUpWindow.Show();
+
         }
 
         private void ShowPopUpWindow()
         {
-            PopUpWindow popUpWindow = new PopUpWindow
-            {
-                MyWindowName = "Тест?",
-                myWindowContent = 1,
-                myWindowAction = 1,
-            };
-
+           
         }
 
         private void AddColumn(object sender, RoutedEventArgs e)

@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Reflection.Emit;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MiniExcel
 {
@@ -19,25 +12,17 @@ namespace MiniExcel
     /// </summary>
     public partial class PopUpWindow : Window
     {
-        public string MyWindowName { get; set; } // цей приймає ім'я вінка (шоб понятно було шо ти відкрив)
         public dynamic myWindowContent { get; set; } // цей приймає тип контенту, щоб можа було його правильно налаштувати можна замінити на шось інше наприклад var або похуй в цілому
-        public dynamic myWindowAction { get; set; } // це приймає обєкт класу в якому буде виконуватись дія, щоб коли нажав на ок то зразу відправлялось то шо нада туди куди нада
-
-
-
+        public dynamic myWindowAction { get; set; } // це приймає обєкт класу в якому буде виконуватись дія, щоб коли нажав на ок то зразу відправлялось то шо нада туди куди нада      
 
         public PopUpWindow()
         {
             InitializeComponent();
-            SetWindowName();
-            //WindowContent(myWindowContent);
-           // WindowActon(myWindowAction);
             Show();
         }
 
         private void SetWindowName()
         {
-            WindowName.Content = MyWindowName;
         }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
@@ -45,26 +30,64 @@ namespace MiniExcel
             Close();
         }
 
-        void WindowContent()  // Прийом масива
+        //--- Контент вводу ---
+
+        // 0/0 x/y
+
+        private void CreateInputTextBox() { }
+        private void CreateBoolParam() { }
+        private void CreateTextBoxParam() { }
+
+        public void SortContent()
+        {
+            // 2 текст бокса + параметр (тру фолс)
+        }
+        public void FilterContent() 
+        {
+            // 2 текст бокса + параметр (2 текст бокса)
+        }
+        public void AvarageContent()
+        {
+            // 2 текст бокса 
+        }
+        public void MinContent()
+        {
+            // 2 текст бокса 
+        }
+        public void MaxContent()
+        {
+            // 2 текст бокса 
+        }
+        //--- Контент виводу ---
+
+        public void SetEvent(RoutedEventHandler temp)
+        {
+            if (temp != null)
+            {
+                confirmButton.Click += temp;
+            }
+        }
+        public void SortAction(object sender, RoutedEventArgs e)
         {
 
         }
-        void WindowContent(string result) //виведення результатів дій
+        public void FilterAction(object sender, RoutedEventArgs e)
         {
 
         }
-        void WindowContent(int graph) // Виведення графіка
+        public void AvarageAction(object sender, RoutedEventArgs e)
         {
 
         }
+        public void MinAction(object sender, RoutedEventArgs e)
+        {
 
-        void WindowActon()
-        {
-            
         }
-        void WindowActon(int a)
+        public void MaxAction(object sender, RoutedEventArgs e)
         {
-            
+        
         }
+
+
     }
-    }
+}
