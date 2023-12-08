@@ -6,16 +6,20 @@
         xmlns:local="clr-namespace:MiniExcel"
         mc:Ignorable="d"
         Title="PopUpWindow" Height="450" Width="800">
-    <Grid>
-        <Button 
-            x:Name="confirmButton"
-            Content="Ok"
-            HorizontalAlignment="Center"
-            Margin="0,343,0,0"
-            VerticalAlignment="Top"
-            Width="176"
-            Click="confirmButton_Click"
-        />
+    <Grid Background="AntiqueWhite">
 
-    </Grid>
+        <Grid Margin="10,10,10,10" Background="White" x:Name="popupWindowContainer" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+           </Grid.ColumnDefinitions>
+           <Grid.RowDefinitions>
+               <RowDefinition Height="*"/>
+               <RowDefinition Height="*"/>
+               <RowDefinition Height="*"/>
+           </Grid.RowDefinitions>
+       </Grid>
+   </Grid>
+                
 </Window>
