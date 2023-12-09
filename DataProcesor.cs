@@ -5,24 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-public class DataProcesor {
+public class DataProcesor
+{
 
-    public DataProcesor() 
-    {
-
-    }
-
-    static TextBox[,] SortArray(TextBox[,] array, int rows, int columns)
+    public static TextBox[,] SortArray(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
         // Clone the array to avoid modifying the original array
         TextBox[,] sortedArray = (TextBox[,])array.Clone();
 
         // Bubble sort algorithm
-        for (int i = 0; i < rows; i++)
+        for (int i = startRow; i <= endRow; i++)
         {
-            for (int j = 0; j < columns - 1; j++)
+            for (int j = startColumn; j < endColumn; j++)
             {
-                for (int k = 0; k < columns - j - 1; k++)
+                for (int k = startColumn; k < endColumn - (j - startColumn); k++)
                 {
                     double value1 = double.Parse(sortedArray[i, k].Text);
                     double value2 = double.Parse(sortedArray[i, k + 1].Text);
@@ -41,14 +37,14 @@ public class DataProcesor {
         return sortedArray;
     }
 
-    static TextBox FindMaxValue(TextBox[,] array, int rows, int columns)
+    public static TextBox FindMaxValue(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
-        TextBox maxTextBox = array[0, 0]; // Assume the first element as the initial maximum
+        TextBox maxTextBox = array[startRow, startColumn]; // Assume the first element within the specified range as the initial maximum
 
-        // Iterate through the array to find the maximum value
-        for (int i = 0; i < rows; i++)
+        // Iterate through the specified range to find the maximum value
+        for (int i = startRow; i <= endRow; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn; j++)
             {
                 double currentValue = double.Parse(array[i, j].Text);
 
@@ -63,14 +59,14 @@ public class DataProcesor {
         return maxTextBox;
     }
 
-    static TextBox FindMinValue(TextBox[,] array, int rows, int columns)
+    public static TextBox FindMinValue(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
-        TextBox minTextBox = array[0, 0]; // Assume the first element as the initial minimum
+        TextBox minTextBox = array[startRow, startColumn]; // Assume the first element within the specified range as the initial minimum
 
-        // Iterate through the array to find the minimum value
-        for (int i = 0; i < rows; i++)
+        // Iterate through the specified range to find the minimum value
+        for (int i = startRow; i <= endRow; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn; j++)
             {
                 double currentValue = double.Parse(array[i, j].Text);
 
@@ -84,15 +80,20 @@ public class DataProcesor {
 
         return minTextBox;
     }
-    static TextBox[,] FilterArray(TextBox[,] array, double minValue, double maxValue, int rows, int columns)
-    {
-        // Create a new array to store the filtered values
-        TextBox[,] filteredArray = new TextBox[rows, columns];
 
-        // Iterate through the array and copy values within the specified range
-        for (int i = 0; i < rows; i++)
+    public static TextBox[,] FilterArray(TextBox[,] array, double minValue, double maxValue, int startRow, int startColumn, int endRow, int endColumn)
+    {
+        // Calculate the dimensions of the filtered array
+        int filteredRows = endRow - startRow + 1;
+        int filteredColumns = endColumn - startColumn + 1;
+
+        // Create a new array to store the filtered values
+        TextBox[,] filteredArray = new TextBox[filteredRows, filteredColumns];
+
+        // Iterate through the specified range and copy values within the specified range
+        for (int i = startRow; i <= endRow; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn; j++)
             {
                 double currentValue = double.Parse(array[i, j].Text);
 
@@ -100,13 +101,13 @@ public class DataProcesor {
                 if (currentValue >= minValue && currentValue <= maxValue)
                 {
                     // Create a new TextBox for the filtered array
-                    filteredArray[i, j] = new TextBox();
-                    filteredArray[i, j].Text = currentValue.ToString();
+                    filteredArray[i - startRow, j - startColumn] = new TextBox();
+                    filteredArray[i - startRow, j - startColumn].Text = currentValue.ToString();
                 }
                 else
                 {
                     // Set to null if the value is outside the range
-                    filteredArray[i, j] = null;
+                    filteredArray[i - startRow, j - startColumn] = null;
                 }
             }
         }
@@ -114,34 +115,41 @@ public class DataProcesor {
         return filteredArray;
     }
 
-    static double CalculateAverage(TextBox[,] array, int rows, int columns)
+
+    public static double CalculateAverage(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
         double sum = 0;
+        int count = 0;
 
-        // Iterate through the array and calculate the sum of values
-        for (int i = 0; i < rows; i++)
+        // Iterate through the specified range and calculate the sum of values
+        for (int i = startRow; i <= endRow; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn; j++)
             {
                 double currentValue = double.Parse(array[i, j].Text);
                 sum += currentValue;
+                count++;
             }
         }
 
         // Calculate the average
-        double average = sum / (rows * columns);
+        double average = count > 0 ? sum / count : 0;
         return average;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    static TextBox[,] ConvertTextToUppercase(TextBox[,] inputArray, int rows, int columns)
+    public static TextBox[,] ConvertTextToUppercase(TextBox[,] inputArray, int startRow, int startColumn, int endRow, int endColumn)
     {
+        int rows = inputArray.GetLength(0);
+        int columns = inputArray.GetLength(1);
+
         TextBox[,] resultArray = new TextBox[rows, columns];
 
-        for (int i = 0; i < rows; i++)
+        // Iterate through the specified range and convert text to uppercase
+        for (int i = startRow; i <= endRow && i < rows; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn && j < columns; j++)
             {
                 resultArray[i, j] = new TextBox();
                 resultArray[i, j].Text = inputArray[i, j].Text.ToUpper();
@@ -151,13 +159,17 @@ public class DataProcesor {
         return resultArray;
     }
 
-    static TextBox[,] ConvertTextToLowercase(TextBox[,] inputArray, int rows, int columns)
+    public static TextBox[,] ConvertTextToLowercase(TextBox[,] inputArray, int startRow, int startColumn, int endRow, int endColumn)
     {
+        int rows = inputArray.GetLength(0);
+        int columns = inputArray.GetLength(1);
+
         TextBox[,] resultArray = new TextBox[rows, columns];
 
-        for (int i = 0; i < rows; i++)
+        // Iterate through the specified range and convert text to lowercase
+        for (int i = startRow; i <= endRow && i < rows; i++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int j = startColumn; j <= endColumn && j < columns; j++)
             {
                 resultArray[i, j] = new TextBox();
                 resultArray[i, j].Text = inputArray[i, j].Text.ToLower();
@@ -167,21 +179,26 @@ public class DataProcesor {
         return resultArray;
     }
 
-    static TextBox[,] SortTextAlphabetically(TextBox[,] inputArray, int rows, int columns)
+    public static TextBox[,] SortTextAlphabetically(TextBox[,] inputArray, int startRow, int startColumn, int endRow, int endColumn)
     {
+        int rows = inputArray.GetLength(0);
+        int columns = inputArray.GetLength(1);
+
         TextBox[,] resultArray = new TextBox[rows, columns];
 
-        // Flatten the array and sort the texts alphabetically
+        // Flatten the specified range of the array and sort the texts alphabetically
         var flattenedAndSortedTexts = inputArray
             .Cast<TextBox>()
+            .Skip(startRow * columns + startColumn)
+            .Take((endRow - startRow + 1) * columns)
             .OrderBy(tb => tb.Text)
             .Select((tb, index) => new { TextBox = tb, Index = index });
 
-        // Reconstruct the sorted array
+        // Reconstruct the sorted array within the specified range
         foreach (var item in flattenedAndSortedTexts)
         {
-            int row = item.Index / columns;
-            int col = item.Index % columns;
+            int row = startRow + item.Index / columns;
+            int col = startColumn + item.Index % columns;
 
             resultArray[row, col] = new TextBox();
             resultArray[row, col].Text = item.TextBox.Text;
@@ -190,21 +207,27 @@ public class DataProcesor {
         return resultArray;
     }
 
-    static TextBox[,] SortTextByLength(TextBox[,] inputArray, int rows, int columns)
+
+    public static TextBox[,] SortTextByLength(TextBox[,] inputArray, int startRow, int startColumn, int endRow, int endColumn)
     {
+        int rows = inputArray.GetLength(0);
+        int columns = inputArray.GetLength(1);
+
         TextBox[,] resultArray = new TextBox[rows, columns];
 
-        // Flatten the array and sort the texts by length
+        // Flatten the specified range of the array and sort the texts by length
         var flattenedAndSortedTexts = inputArray
             .Cast<TextBox>()
+            .Skip(startRow * columns + startColumn)
+            .Take((endRow - startRow + 1) * columns)
             .OrderBy(tb => tb.Text.Length)
             .Select((tb, index) => new { TextBox = tb, Index = index });
 
-        // Reconstruct the sorted array
+        // Reconstruct the sorted array within the specified range
         foreach (var item in flattenedAndSortedTexts)
         {
-            int row = item.Index / columns;
-            int col = item.Index % columns;
+            int row = startRow + item.Index / columns;
+            int col = startColumn + item.Index % columns;
 
             resultArray[row, col] = new TextBox();
             resultArray[row, col].Text = item.TextBox.Text;
@@ -213,14 +236,22 @@ public class DataProcesor {
         return resultArray;
     }
 
-    static TextBox[] GetTextBoxesContainingWord(TextBox[,] inputArray, string word)
+
+    public static TextBox[] GetTextBoxesContainingWord(TextBox[,] inputArray, string word, int startRow, int startColumn, int endRow, int endColumn)
     {
-        // Flatten the array and filter TextBoxes containing the specified word
+        int rows = inputArray.GetLength(0);
+        int columns = inputArray.GetLength(1);
+
+        // Flatten the specified range of the array and filter TextBoxes containing the specified word
         var textBoxesWithWord = inputArray
             .Cast<TextBox>()
+            .Skip(startRow * columns + startColumn)
+            .Take((endRow - startRow + 1) * columns)
             .Where(tb => tb.Text.Contains(word))
             .ToArray();
 
         return textBoxesWithWord;
     }
+
+
 }
