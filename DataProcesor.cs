@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 public static class DataProcesor
@@ -20,15 +21,21 @@ public static class DataProcesor
             {
                 for (int k = startColumn; k < endColumn - (j - startColumn); k++)
                 {
-                    double value1 = double.Parse(sortedArray[i, k].Text);
-                    double value2 = double.Parse(sortedArray[i, k + 1].Text);
-
-                    if (value1 > value2)
+                    if (double.TryParse(sortedArray[i, k].Text, out double value1) && double.TryParse(sortedArray[i, k + 1].Text, out double value2))
                     {
-                        // Swap TextBoxes if they are in the wrong order
-                        TextBox temp = sortedArray[i, k];
-                        sortedArray[i, k] = sortedArray[i, k + 1];
-                        sortedArray[i, k + 1] = temp;
+                        if (value1 > value2)
+                        {
+                            // Swap TextBoxes if they are in the wrong order
+                            TextBox temp = sortedArray[i, k];
+                            sortedArray[i, k] = sortedArray[i, k + 1];
+                            sortedArray[i, k + 1] = temp;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("fjashfgkjlashg");
+                        // Handle parsing failure (e.g., non-numeric text)
+                        // You may choose to handle it differently based on your requirements
                     }
                 }
             }
@@ -36,6 +43,7 @@ public static class DataProcesor
 
         return sortedArray;
     }
+
 
     public static TextBox FindMaxValue(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {

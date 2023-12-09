@@ -163,7 +163,7 @@ namespace MiniExcel
         }
         public void SortAction(object sender, RoutedEventArgs e)
         {
-            DataManager.StartSortFunc(1,1,3,3);
+            DataManager.StartSortFunc(1,1,2,2);
             Hide();
         }
         public void FilterAction(object sender, RoutedEventArgs e)
