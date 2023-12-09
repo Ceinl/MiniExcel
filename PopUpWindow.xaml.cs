@@ -73,7 +73,13 @@ namespace MiniExcel
         }
 
 
-        private void CreateBoolParam() { }
+        private void CreateBoolParam() 
+        {
+            RadioButton radioButton = new RadioButton
+            {
+            
+            };
+        }
         private void CreateTextBoxParam() { }
 
         public void SortContent()
