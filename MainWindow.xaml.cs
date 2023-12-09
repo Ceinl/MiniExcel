@@ -162,8 +162,8 @@ namespace MiniExcel
             {
                 TextBox newTextBox = new TextBox
                 {
-                    Width = 30,
-                    Height = 30,
+                    Width = 60,
+                    Height = 60,
                 };
 
                 Grid.SetRow(newTextBox, ItemContainer.RowDefinitions.Count - 1);
