@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-public class DataProcesor
+public static class DataProcesor
 {
 
     public static TextBox[,] SortArray(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)

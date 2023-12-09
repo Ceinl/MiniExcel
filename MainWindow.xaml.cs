@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,18 +22,18 @@ namespace MiniExcel
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
 
         private static TextBox[,] textBoxArray;
 
         public MainWindow()
         {
             InitializeComponent();
-           // popUpWindow = new PopUpWindow();
-            textBoxArray = new TextBox[11,11];
+            // popUpWindow = new PopUpWindow();
+            textBoxArray = new TextBox[11, 11];
         }
 
-      
+
         private void sortButton_Click(object sender, RoutedEventArgs e)
         {
             PopUpWindow popUpWindow = new PopUpWindow();
@@ -76,7 +77,7 @@ namespace MiniExcel
 
         private void ShowPopUpWindow()
         {
-           
+
         }
 
         private void AddColumn(object sender, RoutedEventArgs e)
@@ -131,7 +132,7 @@ namespace MiniExcel
         {
             if (ItemContainer.RowDefinitions.Count >= 11)
             {
-                MessageBox.Show("Maximum number of rows (10) reached.", "Warning!", MessageBoxButton.OK ,MessageBoxImage.Warning);
+                MessageBox.Show("Maximum number of rows (10) reached.", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -176,6 +177,16 @@ namespace MiniExcel
         private void button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public static TextBox[,] GetTextBoxes()
+        {
+            return textBoxArray;
+        }
+
+        public static void SetTextBoxes(TextBox[,] newTextBoxArray)
+        {
+            textBoxArray = newTextBoxArray;
         }
     }
 }

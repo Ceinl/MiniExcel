@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-public class DataAnalyser
+public static class DataAnalyser
 {
 
-    private bool AreValuesNumeric(TextBox[,] textBoxArray, int row, int column)
+    public static bool AreValuesNumeric(TextBox[,] textBoxArray, int row, int column)
     {
         if (textBoxArray == null || row < 0 || row >= textBoxArray.GetLength(0) || column < 0 || column >= textBoxArray.GetLength(1))
         {
