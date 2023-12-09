@@ -8,7 +8,7 @@
         Title="PopUpWindow" Height="450" Width="800">
     <Grid  Background="Gray">
 
-        <Grid Margin="50,35,50,35" Background="White" x:Name="popupWindowContainer" ShowGridLines="True">
+        <Grid Margin="40,35,40,35" Background="White" x:Name="popupWindowContainer" ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
