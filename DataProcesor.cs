@@ -11,7 +11,7 @@ public static class DataProcesor
     public static TextBox[,] SortArray(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
         // Clone the array to avoid modifying the original array
-        TextBox[,] sortedArray = (TextBox[,])array.Clone();
+        TextBox[,] sortedArray = CloneArray(array);
 
         // Bubble sort algorithm
         for (int i = startRow; i <= endRow; i++)
@@ -38,6 +38,25 @@ public static class DataProcesor
         }
 
         return sortedArray;
+    }
+    public static TextBox[,] CloneArray(TextBox[,] sourceArray)
+    {
+        int rows = sourceArray.GetLength(0);
+        int columns = sourceArray.GetLength(1);
+
+        TextBox[,] clonedArray = new TextBox[rows, columns];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                clonedArray[i, j] = new TextBox();
+                if (sourceArray[i, j] != null)
+                clonedArray[i, j].Text = sourceArray[i, j].Text;
+            }
+        }
+
+        return clonedArray;
     }
 
     public static TextBox FindMaxValue(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)

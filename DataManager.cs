@@ -16,12 +16,13 @@ public static class DataManager
 
     }
 
-    public static void StartSortFunc(int startRow, int startColumn, int endRow, int endColumn) 
+    public static void StartSortFunc(int startRow, int startColumn, int endRow, int endColumn)
     {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), 2, 2))
+        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
         {
-            DisplaySortedArray(MainWindow.GetTextBoxes(), endRow, endColumn);
-            MainWindow.SetTextBoxes(DataProcesor.SortArray(MainWindow.GetTextBoxes(), 1, 1, endRow, endColumn));
+            var sortedArray = DataProcesor.SortArray(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
+            DisplaySortedArray(sortedArray, endRow, endColumn);
+            MainWindow.SetTextBoxes(sortedArray, startRow, startColumn, endRow, endColumn);
         }
 
         else
@@ -31,7 +32,7 @@ public static class DataManager
     public static void DisplaySortedArray(TextBox[,] array, int rows, int columns)
     {
         // Call the SortArray function to sort the array
-        TextBox[,] sortedArray = DataProcesor.SortArray(array, 1, 1, rows, columns);
+        TextBox[,] sortedArray = array;
 
         // Build a string to display the sorted array
         StringBuilder resultMessage = new StringBuilder();

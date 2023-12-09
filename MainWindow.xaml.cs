@@ -184,10 +184,33 @@ namespace MiniExcel
             return textBoxArray;
         }
 
-        public static void SetTextBoxes(TextBox[,] newTextBoxArray)
+        public static void SetTextBoxes(TextBox[,] newTextBoxArray, int startRow, int startColumn, int endRow, int endColumn)
         {
-            textBoxArray = newTextBoxArray;
+            int rows = newTextBoxArray.GetLength(0);
+            int columns = newTextBoxArray.GetLength(1);
+
+            // Ensure that the dimensions match
+            if (rows == textBoxArray.GetLength(0) && columns == textBoxArray.GetLength(1))
+            {
+                for (int i = startRow; i <= endRow; i++)
+                {
+                    for (int j = startColumn; j <= endColumn; j++)
+                    {
+                        if (newTextBoxArray[i, j] != null)
+                        {
+                            textBoxArray[i, j].Text = newTextBoxArray[i, j].Text;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Dimensions do not match.");
+                // Handle a case where the dimensions do not match (optional)
+                // You may choose to throw an exception or handle it differently based on your requirements
+            }
         }
+
     }
 }
 
