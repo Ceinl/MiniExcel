@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection.Emit;
 using System.Threading;
 using System.Windows;
@@ -80,6 +81,29 @@ namespace MiniExcel
 
         }
 
+        private string GetFromTextBox(int x, int y)
+        {
+            string coordinates = null;
+
+            // Перевірка, чи грід існує та чи координати знаходяться в межах гріда
+            if (popupWindowContainer != null && x >= 0 && y >= 0 && x < popupWindowContainer.ColumnDefinitions.Count && y < popupWindowContainer.RowDefinitions.Count)
+            {
+                // Отримання тексту з текстового поля за допомогою індексів стовпця і рядка
+                TextBox textBox = popupWindowContainer.Children
+                    .OfType<TextBox>()
+                    .FirstOrDefault(tb => Grid.GetColumn(tb) == x && Grid.GetRow(tb) == y);
+
+                if (textBox != null)
+                {
+                    coordinates = textBox.Text;
+                }
+            }
+
+            return coordinates;
+        }
+
+
+
         private void InputContent() 
         {
             CreateLabel("Please write input coordinates:", 0, 0);
@@ -122,6 +146,12 @@ namespace MiniExcel
             InputContent();
 
         }
+
+        public void OutputContent(string Result)
+        {
+            CreateLabel($"Your result: {Result}", 1, 1);
+        }
+
         //--- Контент виводу ---
 
         public void SetEvent(RoutedEventHandler temp)
@@ -151,7 +181,5 @@ namespace MiniExcel
         {
         
         }
-
-
     }
 }
