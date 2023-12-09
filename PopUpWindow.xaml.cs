@@ -35,73 +35,92 @@ namespace MiniExcel
 
         // 0/0 x/y
 
-        private void CreateInputfields()
+
+        private void CreateLabel(string LabelContent, int x, int y) 
         {
-            // Create Label and TextBoxes
             Label label = new Label
             {
-                Content = "Label",
+                Content = LabelContent,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center
             };
-
-            TextBox textBox1 = new TextBox
-            {
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-
-            TextBox textBox2 = new TextBox
-            {
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-
-            // Add controls to the existing popupWindowContainer Grid
-            Grid.SetColumn(label, 0); // Column 1
-            Grid.SetRow(label, 0);    // Row 1
-
-            Grid.SetColumn(textBox1, 1); // Column 2
-            Grid.SetRow(textBox1, 0);    // Row 1
-
-            Grid.SetColumn(textBox2, 2); // Column 3
-            Grid.SetRow(textBox2, 0);    // Row 1
-
+            Grid.SetColumn(label, y); 
+            Grid.SetRow(label, x);  
             popupWindowContainer.Children.Add(label);
-            popupWindowContainer.Children.Add(textBox1);
-            popupWindowContainer.Children.Add(textBox2);
         }
 
+        private void CreateTextbox(string TextBoxContent, int x, int y) 
+        {
+            TextBox textBox = new TextBox
+            {
+                Text = TextBoxContent,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 150,
+                TextAlignment = TextAlignment.Center,
+            };
+            Grid.SetColumn(textBox, y);
+            Grid.SetRow(textBox, x);
+            popupWindowContainer.Children.Add(textBox);
 
-        private void CreateBoolParam() 
+        }
+
+        private void CreateRadiobutton(string RadioButtonContent, int x, int y) 
         {
             RadioButton radioButton = new RadioButton
             {
-            
+                Content = RadioButtonContent,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
             };
+            Grid.SetColumn(radioButton, y);
+            Grid.SetRow(radioButton, x);
+            popupWindowContainer.Children.Add(radioButton);
+
+
         }
-        private void CreateTextBoxParam() { }
+
+        private void InputContent() 
+        {
+            CreateLabel("Please write input coordinates:", 0, 0);
+            CreateTextbox("Coordinates of the start x/y", 0, 1);
+            CreateTextbox("Coordinates of the end x/y", 0, 2);
+        }
 
         public void SortContent()
         {
-            CreateInputfields();
             // 2 текст бокса + параметр (тру фолс)
+            InputContent();
+            CreateLabel("Please choice a sorting parametr:", 1, 0);
+            CreateRadiobutton("From lower to higher",1,1);
+            CreateRadiobutton("From higher to lower", 1,2);
         }
         public void FilterContent() 
         {
             // 2 текст бокса + параметр (2 текст бокса)
+            InputContent();
+            CreateLabel("Please write filtering diapason:", 1, 0);
+            CreateTextbox("low border", 1, 1);
+            CreateTextbox("high border", 1, 2);
+
         }
         public void AvarageContent()
         {
             // 2 текст бокса 
+            InputContent();
+
         }
         public void MinContent()
         {
             // 2 текст бокса 
+            InputContent();
+
         }
         public void MaxContent()
         {
             // 2 текст бокса 
+            InputContent();
+
         }
         //--- Контент виводу ---
 
@@ -109,7 +128,7 @@ namespace MiniExcel
         {
             if (temp != null)
             {
-                //confirmButton.Click += temp;
+                confirmButton.Click += temp;
             }
         }
         public void SortAction(object sender, RoutedEventArgs e)
