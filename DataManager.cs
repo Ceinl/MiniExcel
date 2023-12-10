@@ -11,9 +11,12 @@ public static class DataManager
 {
     //1 метод для виклику вікна результату
     //1 метод на кожну дію
-    public static void OpenResultWindow()
+    public static void OpenResultWindow(string result)
     {
-
+        PopUpWindow popUpWindow = new PopUpWindow();
+        popUpWindow.OutputContent(result);
+        popUpWindow.SetEvent(popUpWindow.OutputAction);
+        popUpWindow.Show();
     }
 
     public static void SortFunc(int startRow, int startColumn, int endRow, int endColumn)
