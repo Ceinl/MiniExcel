@@ -193,12 +193,13 @@ namespace MiniExcel
         }
         public void SortAction(object sender, RoutedEventArgs e)
         {
-            DataManager.StartSortFunc(1,1,2,2);
+            DataManager.SortFunc(1,1,2,2);
             Hide();
         }
         public void FilterAction(object sender, RoutedEventArgs e)
         {
-
+            DataManager.FilterFunc(1, 1, 2, 2, 0, 100);
+            Hide();
         }
         public void AvarageAction(object sender, RoutedEventArgs e)
         {
@@ -206,7 +207,8 @@ namespace MiniExcel
         }
         public void MinAction(object sender, RoutedEventArgs e)
         {
-
+            DataManager.MinFunc(1, 1, 2, 2);
+            Hide();
         }
         public void MaxAction(object sender, RoutedEventArgs e)
         {
