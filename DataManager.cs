@@ -67,6 +67,8 @@ public static class DataManager
         }
     }
 
+    
+
     public static void DisplayArray(TextBox[,] array, int rows, int columns)
     {
         // Call the SortArray function to sort the array

@@ -203,7 +203,7 @@ namespace MiniExcel
         }
         public void AvarageAction(object sender, RoutedEventArgs e)
         {
-
+            DataManager.AvarageFunc(1, 1, 2, 2);
         }
         public void MinAction(object sender, RoutedEventArgs e)
         {
