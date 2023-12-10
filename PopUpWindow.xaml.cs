@@ -81,7 +81,7 @@ namespace MiniExcel
 
         }
 
-        private string GetFromTextBox(int x, int y)
+        public string GetFromTextBox(int x, int y)
         {
             string coordinates = null;
 
@@ -101,6 +101,34 @@ namespace MiniExcel
 
             return coordinates;
         }
+
+        public (int, int) GetCoorditates(int x, int y)
+        {
+            string toTransform = GetFromTextBox(x, y);
+
+            int CoordinateX = 0, coordinateY = 0;
+            
+                string[] coordinates = toTransform.Split('/');
+
+                if (coordinates.Length == 2)
+                {
+                    if (int.TryParse(coordinates[0], out CoordinateX) && int.TryParse(coordinates[1], out coordinateY))
+                    {
+                        return (CoordinateX, coordinateY);
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Please put only numbers to coordinates");
+                        return (1, 1);
+                    }
+                }
+                else 
+                {
+                    MessageBox.Show("Please use a x/y coordinates pattern");
+                    return (1, 1);
+                }
+        }
+
 
 
 
@@ -181,6 +209,10 @@ namespace MiniExcel
         public void MaxAction(object sender, RoutedEventArgs e)
         {
         
+        }
+        public void OutputAction(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
