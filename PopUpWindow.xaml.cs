@@ -214,7 +214,7 @@ namespace MiniExcel
         }
         public void OutputAction(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }
