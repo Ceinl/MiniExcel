@@ -104,7 +104,9 @@ namespace MiniExcel
 
         public (int, int) GetCoorditates(int x, int y)
         {
-            string toTransform = GetFromTextBox(x, y);
+                string toTransform = GetFromTextBox(x, y);
+
+            
 
             int CoordinateX = 0, coordinateY = 0;
             
@@ -119,13 +121,13 @@ namespace MiniExcel
                     else 
                     {
                         MessageBox.Show("Please put only numbers to coordinates");
-                        return (1, 1);
+                        return (12, 12);
                     }
                 }
                 else 
                 {
                     MessageBox.Show("Please use a x/y coordinates pattern");
-                    return (1, 1);
+                    return (12, 12);
                 }
         }
 
