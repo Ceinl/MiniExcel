@@ -110,7 +110,7 @@ public static class DataProcesor
         int filteredColumns = endColumn - startColumn + 1;
 
         // Create a new array to store the filtered values
-        TextBox[,] filteredArray = new TextBox[filteredRows, filteredColumns];
+        TextBox[,] filteredArray = CloneArray(array);
 
         // Iterate through the specified range and copy values within the specified range
         for (int i = startRow; i <= endRow; i++)
@@ -123,13 +123,13 @@ public static class DataProcesor
                 if (currentValue >= minValue && currentValue <= maxValue)
                 {
                     // Create a new TextBox for the filtered array
-                    filteredArray[i - startRow, j - startColumn] = new TextBox();
-                    filteredArray[i - startRow, j - startColumn].Text = currentValue.ToString();
+                    filteredArray[i, j] = new TextBox();
+                    filteredArray[i, j].Text = currentValue.ToString();
                 }
                 else
                 {
                     // Set to null if the value is outside the range
-                    filteredArray[i - startRow, j - startColumn] = null;
+                    filteredArray[i, j].Text = string.Empty;
                 }
             }
         }

@@ -16,12 +16,11 @@ public static class DataManager
 
     }
 
-    public static void StartSortFunc(int startRow, int startColumn, int endRow, int endColumn)
+    public static void SortFunc(int startRow, int startColumn, int endRow, int endColumn)
     {
         if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
         {
             var sortedArray = DataProcesor.SortArray(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
-            DisplaySortedArray(sortedArray, endRow, endColumn);
             MainWindow.SetTextBoxes(sortedArray, startRow, startColumn, endRow, endColumn);
         }
 
@@ -29,7 +28,34 @@ public static class DataManager
             MessageBox.Show("dsahf");
     }
 
-    public static void DisplaySortedArray(TextBox[,] array, int rows, int columns)
+    public static void FilterFunc(int startRow, int startColumn, int endRow, int endColumn, double minValue, double maxValue)
+    {
+        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        {
+            var filteredArray = DataProcesor.FilterArray(MainWindow.GetTextBoxes(), minValue, maxValue, startRow, startColumn, endRow, endColumn);
+            MainWindow.SetTextBoxes(filteredArray, startRow, startColumn, endRow, endColumn);
+        }
+    }
+
+    public static void MinFunc(int startRow, int startColumn, int endRow, int endColumn)
+    {
+        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        {
+            var result = DataProcesor.FindMinValue(MainWindow.GetTextBoxes(),startRow, startColumn, endRow, endColumn);
+            MessageBox.Show(result.Text);
+        }
+    }
+
+    public static void MaxFunc(int startRow, int startColumn, int endRow, int endColumn)
+    {
+        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        {
+            var result = DataProcesor.FindMaxValue(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
+            MessageBox.Show(result.Text);
+        }
+    }
+
+    public static void DisplayArray(TextBox[,] array, int rows, int columns)
     {
         // Call the SortArray function to sort the array
         TextBox[,] sortedArray = array;
