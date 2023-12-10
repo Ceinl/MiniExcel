@@ -45,7 +45,7 @@ public static class DataManager
         if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
         {
             var result = DataProcesor.FindMinValue(MainWindow.GetTextBoxes(),startRow, startColumn, endRow, endColumn);
-            MessageBox.Show(result.Text);
+            OpenResultWindow(result.Text);
         }
     }
 
@@ -54,7 +54,16 @@ public static class DataManager
         if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
         {
             var result = DataProcesor.FindMaxValue(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
-            MessageBox.Show(result.Text);
+            OpenResultWindow(result.Text);
+        }
+    }
+
+    public static void AvarageFunc(int startRow, int startColumn, int endRow, int endColumn)
+    {
+        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        {
+            var result = DataProcesor.CalculateAverage(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
+            OpenResultWindow(result.ToString());
         }
     }
 
