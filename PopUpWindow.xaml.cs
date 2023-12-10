@@ -81,7 +81,7 @@ namespace MiniExcel
 
         }
 
-        public string GetFromTextBox(int x, int y)
+        private string GetFromTextBox(int x, int y)
         {
             string coordinates = null;
 
@@ -212,7 +212,7 @@ namespace MiniExcel
         }
         public void MaxAction(object sender, RoutedEventArgs e)
         {
-        
+            DataManager.MaxFunc(1, 1, 2, 2);
         }
         public void OutputAction(object sender, RoutedEventArgs e)
         {
