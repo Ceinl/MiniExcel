@@ -102,6 +102,19 @@ namespace MiniExcel
             return coordinates;
         }
 
+        private double GetDoubleFromTextBox(int x, int y)
+        {
+            string text = GetFromTextBox(x, y);
+
+            if(double.TryParse(text, out double number))
+            {
+                return number;
+            }
+
+            MessageBox.Show("Enter the number into field", "Warning!", MessageBoxButton.OK, MessageBoxImage.Error);
+            return double.NaN;
+        }
+
         public (int, int) GetCoorditates(int x, int y)
         {
                 string toTransform = GetFromTextBox(x, y);
@@ -137,8 +150,8 @@ namespace MiniExcel
         private void InputContent() 
         {
             CreateLabel("Please write input coordinates:", 0, 0);
-            CreateTextbox("Coordinates of the start x/y", 0, 1);
-            CreateTextbox("Coordinates of the end x/y", 0, 2);
+            CreateTextbox("1/1", 0, 1);
+            CreateTextbox("5/5", 0, 2);
         }
 
         public void SortContent()
@@ -193,26 +206,38 @@ namespace MiniExcel
         }
         public void SortAction(object sender, RoutedEventArgs e)
         {
-            DataManager.SortFunc(1,1,2,2);
+            var startCoords = GetCoorditates(1, 0);
+            var endCoords = GetCoorditates(2, 0);
+            DataManager.SortFunc(startCoords.Item1,startCoords.Item2,endCoords.Item1, endCoords.Item2);
             Hide();
         }
         public void FilterAction(object sender, RoutedEventArgs e)
         {
-            DataManager.FilterFunc(1, 1, 2, 2, 0, 100);
+            var startCoords = GetCoorditates(1, 0);
+            var endCoords = GetCoorditates(2, 0);
+            double minValue = GetDoubleFromTextBox(1,1);
+            double maxValue = GetDoubleFromTextBox(2,1);
+            DataManager.FilterFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2, minValue, maxValue);
             Hide();
         }
         public void AvarageAction(object sender, RoutedEventArgs e)
         {
-            DataManager.AvarageFunc(1, 1, 2, 2);
+            var startCoords = GetCoorditates(1, 0);
+            var endCoords = GetCoorditates(2, 0);
+            DataManager.AvarageFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
         }
         public void MinAction(object sender, RoutedEventArgs e)
         {
-            DataManager.MinFunc(1, 1, 2, 2);
+            var startCoords = GetCoorditates(1, 0);
+            var endCoords = GetCoorditates(2, 0);
+            DataManager.MinFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
             Hide();
         }
         public void MaxAction(object sender, RoutedEventArgs e)
         {
-            DataManager.MaxFunc(1, 1, 2, 2);
+            var startCoords = GetCoorditates(1, 0);
+            var endCoords = GetCoorditates(2, 0);
+            DataManager.MaxFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
         }
         public void OutputAction(object sender, RoutedEventArgs e)
         {

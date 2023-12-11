@@ -186,7 +186,7 @@ namespace MiniExcel
                 ItemContainer.Children.Add(newTextBox);
 
                 //Додаємо текстбокс в масив по відповідних координатах
-                textBoxArray[i, ItemContainer.ColumnDefinitions.Count - 1] = newTextBox;
+                textBoxArray[ItemContainer.ColumnDefinitions.Count - 1, i] = newTextBox;
             }
         }
 

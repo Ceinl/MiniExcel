@@ -7,38 +7,51 @@ using System.Windows.Controls;
 
 public static class DataProcesor
 {
-
     public static TextBox[,] SortArray(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
         // Clone the array to avoid modifying the original array
         TextBox[,] sortedArray = CloneArray(array);
 
-        // Bubble sort algorithm
+        // Selection sort algorithm
         for (int i = startRow; i <= endRow; i++)
         {
             for (int j = startColumn; j <= endColumn; j++)
             {
-                for (int k = startRow; k <= endRow; k++)
-                {
-                    for (int l = startColumn; l <= endColumn - (k - startRow); l++)
-                    {
-                        double value1 = double.Parse(sortedArray[k, l].Text);
-                        double value2 = double.Parse(sortedArray[i, j].Text);
+                int minIndex = FindMinIndex(sortedArray, i, j, endRow, endColumn);
 
-                        if (value1 > value2)
-                        {
-                            // Swap TextBoxes if they are in the wrong order
-                            TextBox temp = sortedArray[k, l];
-                            sortedArray[k, l] = sortedArray[i, j];
-                            sortedArray[i, j] = temp;
-                        }
-                    }
-                }
+                // Swap TextBoxes
+                TextBox temp = sortedArray[i, j];
+                sortedArray[i, j] = sortedArray[minIndex / (endColumn + 1), minIndex % (endColumn + 1)];
+                sortedArray[minIndex / (endColumn + 1), minIndex % (endColumn + 1)] = temp;
             }
         }
 
         return sortedArray;
     }
+
+    private static int FindMinIndex(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
+    {
+        int minIndex = startRow * (endColumn + 1) + startColumn;
+        double minValue = double.Parse(array[startRow, startColumn].Text);
+
+        for (int i = startRow; i <= endRow; i++)
+        {
+            for (int j = (i == startRow) ? startColumn + 1 : startColumn; j <= endColumn; j++)
+            {
+                double currentValue = double.Parse(array[i, j].Text);
+
+                if (currentValue < minValue)
+                {
+                    minValue = currentValue;
+                    minIndex = i * (endColumn + 1) + j;
+                }
+            }
+        }
+
+        return minIndex;
+    }
+
+
     public static TextBox[,] CloneArray(TextBox[,] sourceArray)
     {
         int rows = sourceArray.GetLength(0);
