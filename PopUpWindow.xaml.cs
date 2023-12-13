@@ -246,22 +246,27 @@ namespace MiniExcel
 
         public void UpperCaseContent()
         {
+            InputContent();
 
         }
         public void LowerCaseContent() 
         {
-        
+            InputContent();
+
         }
         public void sortAbcContent() 
         {
-        
+            InputContent();
+
         }
         public void sortLenghtContent() 
         {
-        
+            InputContent();
+
         }
         public void searchContent()
         {
+            InputContent();
 
         }
         // TEXT ACTION
