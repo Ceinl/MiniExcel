@@ -239,6 +239,62 @@ namespace MiniExcel
             var endCoords = GetCoorditates(2, 0);
             DataManager.MaxFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
         }
+
+
+
+        // TEXT CONTENT
+
+        public void UpperCaseContent()
+        {
+
+        }
+        public void LowerCaseContent() 
+        {
+        
+        }
+        public void sortAbcContent() 
+        {
+        
+        }
+        public void sortLenghtContent() 
+        {
+        
+        }
+        public void searchContent()
+        {
+
+        }
+        // TEXT ACTION
+
+        public void UpperCaseAction(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void LowerCaseAction(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void sortAbcAction(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void sortLenghtAction(object sender, RoutedEventArgs e)
+        {
+
+        }
+        public void searchAction(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
         public void OutputAction(object sender, RoutedEventArgs e)
         {
             Close();

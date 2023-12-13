@@ -78,6 +78,49 @@ namespace MiniExcel
 
         }
 
+        /////////////////////////////// ТЕКСТОВІ ІВЕНТИ 
+        private void upperCaseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.UpperCaseContent();
+            popUpWindow.SetEvent(popUpWindow.UpperCaseAction);
+            popUpWindow.Show();
+        }
+
+        private void lowerCaseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.LowerCaseContent();
+            popUpWindow.SetEvent(popUpWindow.LowerCaseAction);
+            popUpWindow.Show();
+        }
+
+        private void sortAbcBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.sortAbcContent();
+            popUpWindow.SetEvent(popUpWindow.sortAbcAction);
+            popUpWindow.Show();
+        }
+
+        private void sortLenghtBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.sortLenghtContent();
+            popUpWindow.SetEvent(popUpWindow.sortLenghtAction);
+            popUpWindow.Show();
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.searchContent();
+            popUpWindow.SetEvent(popUpWindow.searchAction);
+            popUpWindow.Show();
+        }
+
+
+
         private void ShowPopUpWindow()
         {
 
@@ -227,6 +270,7 @@ namespace MiniExcel
             }
         }
 
+        
     }
 }
 

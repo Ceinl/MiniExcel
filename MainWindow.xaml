@@ -103,7 +103,7 @@
             HorizontalAlignment="Left"
             Margin="615,260,0,0"
             VerticalAlignment="Top"
-            Width="175"
+            Width="175" Click="upperCaseBtn_Click"
         />
         <Button 
             x:Name="lowerCaseBtn"
@@ -111,7 +111,7 @@
             HorizontalAlignment="Left"
             Margin="615,285,0,0"
             VerticalAlignment="Top"
-            Width="175"
+            Width="175" Click="lowerCaseBtn_Click"
         />
         <Button
             x:Name="sortAbcBtn"
@@ -119,7 +119,7 @@
             HorizontalAlignment="Left"
             Margin="615,310,0,0"
             VerticalAlignment="Top"
-            Width="175"
+            Width="175" Click="sortAbcBtn_Click"
         />
         <Button 
             x:Name="sortLenghtBtn"
@@ -127,7 +127,7 @@
             HorizontalAlignment="Left"
             Margin="615,335,0,0"
             VerticalAlignment="Top"
-            Width="175"
+            Width="175" Click="sortLenghtBtn_Click"
         />
         <Button 
             x:Name="searchBtn"
@@ -135,7 +135,7 @@
             HorizontalAlignment="Left"
             Margin="615,360,0,0"
             VerticalAlignment="Top"
-            Width="175"
+            Width="175" Click="searchBtn_Click"
         />
         <Button 
             x:Name="removeRowBtn"
