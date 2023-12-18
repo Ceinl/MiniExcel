@@ -14,29 +14,18 @@ namespace MiniExcel
     /// </summary>
     public partial class PopUpWindow : Window
     {
-       // public dynamic myWindowContent { get; set; } // цей приймає тип контенту, щоб можа було його правильно налаштувати можна замінити на шось інше наприклад var або похуй в цілому
-       // public dynamic myWindowAction { get; set; } // це приймає обєкт класу в якому буде виконуватись дія, щоб коли нажав на ок то зразу відправлялось то шо нада туди куди нада      
-
         public PopUpWindow()
         {
             InitializeComponent();
             Show();
         }
 
-        private void SetWindowName()
-        {
-        }
+      
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        //--- Контент вводу ---
-
-        // 0/0 x/y
-
-
         private void CreateLabel(string LabelContent, int x, int y) 
         {
             Label label = new Label
@@ -85,10 +74,8 @@ namespace MiniExcel
         {
             string coordinates = null;
 
-            // Перевірка, чи грід існує та чи координати знаходяться в межах гріда
             if (popupWindowContainer != null && x >= 0 && y >= 0 && x < popupWindowContainer.ColumnDefinitions.Count && y < popupWindowContainer.RowDefinitions.Count)
             {
-                // Отримання тексту з текстового поля за допомогою індексів стовпця і рядка
                 TextBox textBox = popupWindowContainer.Children
                     .OfType<TextBox>()
                     .FirstOrDefault(tb => Grid.GetColumn(tb) == x && Grid.GetRow(tb) == y);
@@ -150,17 +137,14 @@ namespace MiniExcel
         private void InputContent() 
         {
             CreateLabel("Please write input coordinates:", 0, 0);
-            CreateTextbox("1/1", 0, 1);
-            CreateTextbox("5/5", 0, 2);
+            CreateTextbox("X/Y", 0, 1);
+            CreateTextbox("X/Y", 0, 2);
         }
 
         public void SortContent()
         {
             // 2 текст бокса + параметр (тру фолс)
             InputContent();
-            CreateLabel("Please choice a sorting parametr:", 1, 0);
-            CreateRadiobutton("From lower to higher",1,1);
-            CreateRadiobutton("From higher to lower", 1,2);
         }
         public void FilterContent() 
         {
@@ -204,40 +188,51 @@ namespace MiniExcel
                 confirmButton.Click += temp;
             }
         }
-        public void SortAction(object sender, RoutedEventArgs e)
+
+        private TextBox[,] SplitTextBox() 
         {
             var startCoords = GetCoorditates(1, 0);
             var endCoords = GetCoorditates(2, 0);
-            DataManager.SortFunc(startCoords.Item1,startCoords.Item2,endCoords.Item1, endCoords.Item2);
-            Hide();
+
+            FieldManipulator.SetCoordinates(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
+
+            return FieldManipulator.FieldSplitter(MainWindow.GetTextBoxes());
+        }
+
+        private TextBox[,] ConnectTextBox(TextBox[,] OriginalArray, TextBox[,] UpdatedArray) 
+        {
+            return FieldManipulator.FieldConector(OriginalArray, UpdatedArray);
+        }
+
+        public void SortAction(object sender, RoutedEventArgs e)
+        {
+            TextBox[,] UpdatedTextBox = DataManager.NumericSortCalling(SplitTextBox());
+
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
         public void FilterAction(object sender, RoutedEventArgs e)
         {
-            var startCoords = GetCoorditates(1, 0);
-            var endCoords = GetCoorditates(2, 0);
-            double minValue = GetDoubleFromTextBox(1,1);
-            double maxValue = GetDoubleFromTextBox(2,1);
-            DataManager.FilterFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2, minValue, maxValue);
-            Hide();
+            int.TryParse(GetFromTextBox(1, 1), out int minValue);
+            int.TryParse(GetFromTextBox(2,1), out int maxValue);
+
+            DataManager.NumFilterCalling(SplitTextBox(), minValue, maxValue);
+
+            Close();
         }
         public void AvarageAction(object sender, RoutedEventArgs e)
         {
-            var startCoords = GetCoorditates(1, 0);
-            var endCoords = GetCoorditates(2, 0);
-            DataManager.AvarageFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
+            DataManager.AvarageNumCalling(SplitTextBox());
+
         }
         public void MinAction(object sender, RoutedEventArgs e)
         {
-            var startCoords = GetCoorditates(1, 0);
-            var endCoords = GetCoorditates(2, 0);
-            DataManager.MinFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
-            Hide();
+            DataManager.MinNumCalling(SplitTextBox());
         }
         public void MaxAction(object sender, RoutedEventArgs e)
         {
-            var startCoords = GetCoorditates(1, 0);
-            var endCoords = GetCoorditates(2, 0);
-            DataManager.MaxFunc(startCoords.Item1, startCoords.Item2, endCoords.Item1, endCoords.Item2);
+            DataManager.MaxNumCalling(SplitTextBox());
         }
 
 
@@ -247,17 +242,14 @@ namespace MiniExcel
         public void UpperCaseContent()
         {
             InputContent();
-
         }
         public void LowerCaseContent() 
         {
             InputContent();
-
         }
         public void sortAbcContent() 
         {
             InputContent();
-
         }
         public void sortLenghtContent() 
         {
@@ -267,38 +259,50 @@ namespace MiniExcel
         public void searchContent()
         {
             InputContent();
-
+            CreateTextbox("Searched content", 1, 1);
         }
         // TEXT ACTION
 
         public void UpperCaseAction(object sender, RoutedEventArgs e)
         {
+            TextBox[,] UpdatedTextBox = DataManager.UpperCaseCaller(SplitTextBox());
 
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
         public void LowerCaseAction(object sender, RoutedEventArgs e)
         {
+            TextBox[,] UpdatedTextBox = DataManager.LowerCaseCaller(SplitTextBox());
 
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
         public void sortAbcAction(object sender, RoutedEventArgs e)
         {
+            TextBox[,] UpdatedTextBox = DataManager.AbcSorterCalling(SplitTextBox());
 
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
         public void sortLenghtAction(object sender, RoutedEventArgs e)
         {
+            TextBox[,] UpdatedTextBox = DataManager.LengthSorterCalling(SplitTextBox());
 
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
         public void searchAction(object sender, RoutedEventArgs e)
         {
+            TextBox[,] UpdatedTextBox = DataManager.SearchByWord(SplitTextBox(),GetFromTextBox(1,1));
 
+            MainWindow.SetTextBox(ConnectTextBox(MainWindow.GetTextBoxes(), UpdatedTextBox));
+
+            Close();
         }
-
-
-
-
-
-
-
-
 
         public void OutputAction(object sender, RoutedEventArgs e)
         {

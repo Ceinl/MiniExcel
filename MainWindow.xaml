@@ -142,14 +142,14 @@
             Content="Row - "
             HorizontalAlignment="Left"
             Margin="738,35,0,0"
-            VerticalAlignment="Top"
+            VerticalAlignment="Top" Click="removeRowBtn_Click"
         />
         <Button 
             x:Name="removeColumnBtn"
             Content="Column - " HorizontalAlignment="Left"
             Margin="663,35,0,0"
             VerticalAlignment="Top"
-            RenderTransformOrigin="2.491,1.343"
+            RenderTransformOrigin="2.491,1.343" Click="removeColumnBtn_Click"
         />
 
     </Grid>

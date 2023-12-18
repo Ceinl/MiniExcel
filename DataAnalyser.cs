@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -9,27 +10,52 @@ using System.Windows.Controls;
 public static class DataAnalyser
 {
 
-    public static bool AreValuesNumeric(TextBox[,] textBoxArray, int row, int column)
+    private static bool isNotNullCheck(TextBox[,] textBoxArray)
     {
-        if (textBoxArray == null || row < 0 || row >= textBoxArray.GetLength(0) || column < 0 || column >= textBoxArray.GetLength(1))
+        if (textBoxArray != null) 
         {
-            MessageBox.Show("dsahfdsafasfaf");
-            return false;
+            return true;
         }
-
-        for (int i = 1; i <= row; i++)
+        return false;
+        
+    }
+    private static bool isNumericCheck(TextBox[,] textBoxArray)
+    {
+        int rows = textBoxArray.GetLength(0);
+        int columns = textBoxArray.GetLength(1);
+        for (int i = 1; i <= rows; i++)
         {
-            for (int j = 1; j <= column; j++)
+            for (int j = 1; j <= columns; j++)
             {
                 if (!double.TryParse(textBoxArray[i, j]?.Text, out _))
                 {
-                    MessageBox.Show("f");
+                    MessageBox.Show("Valueis is not numeric");
                     return false;
+
                 }
             }
         }
 
         return true;
+
+    }
+
+    public static bool Checker(TextBox[,] textBoxArray) 
+    {
+        if (isNotNullCheck(textBoxArray) && isNumericCheck(textBoxArray)) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool CheckerForString(TextBox[,] textBoxArray)
+    {
+        if (isNotNullCheck(textBoxArray))
+        {
+            return true;
+        }
+        return false;
     }
 
 }

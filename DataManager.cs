@@ -9,85 +9,151 @@ using System.Windows.Controls;
 
 public static class DataManager
 {
-    //1 метод для виклику вікна результату
-    //1 метод на кожну дію
     public static void OpenResultWindow(string result)
     {
         PopUpWindow popUpWindow = new PopUpWindow();
         popUpWindow.OutputContent(result);
         popUpWindow.SetEvent(popUpWindow.OutputAction);
         popUpWindow.Show();
+        
     }
 
-    public static void SortFunc(int startRow, int startColumn, int endRow, int endColumn)
+    //.......................... Методи виклику числових операцій .........................//
+
+    public static TextBox[,] NumericSortCalling(TextBox[,] OriginalArray) 
     {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        if (DataAnalyser.Checker(OriginalArray)) 
         {
-            var sortedArray = DataProcesor.SortArray(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
-            MainWindow.SetTextBoxes(sortedArray, startRow, startColumn, endRow, endColumn);
+            return SortingProcesor.NumericSortingProcess(OriginalArray);
+        }
+        else 
+        {
+            MessageBox.Show("Error");
+            return OriginalArray;
         }
 
+    }
+
+    public static void NumFilterCalling(TextBox[,] OriginalArray, int lowerbound, int higherbound)
+    {
+        if (DataAnalyser.Checker(OriginalArray))
+        {
+            OpenResultWindow(FilterProcesor.Filter(OriginalArray, lowerbound, higherbound));
+        }
         else
-            MessageBox.Show("dsahf");
-    }
-
-    public static void FilterFunc(int startRow, int startColumn, int endRow, int endColumn, double minValue, double maxValue)
-    {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
         {
-            var filteredArray = DataProcesor.FilterArray(MainWindow.GetTextBoxes(), minValue, maxValue, startRow, startColumn, endRow, endColumn);
-            MainWindow.SetTextBoxes(filteredArray, startRow, startColumn, endRow, endColumn);
+            MessageBox.Show("Error");
+        }
+    }
+    public static void AvarageNumCalling(TextBox[,] OriginalArray) 
+    {
+        if (DataAnalyser.Checker(OriginalArray))
+        {
+            OpenResultWindow(FinderProcesor.AvarageFinder(OriginalArray).ToString());
+        }
+        else
+        {
+            MessageBox.Show("Error");
         }
     }
 
-    public static void MinFunc(int startRow, int startColumn, int endRow, int endColumn)
+    public static void MaxNumCalling(TextBox[,] OriginalArray)
     {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        if (DataAnalyser.Checker(OriginalArray))
         {
-            var result = DataProcesor.FindMinValue(MainWindow.GetTextBoxes(),startRow, startColumn, endRow, endColumn);
-            OpenResultWindow(result.Text);
+            OpenResultWindow(FinderProcesor.MaxFinder(OriginalArray).ToString());
+        }
+        else
+        {
+            MessageBox.Show("Error");
+        }
+       
+    }
+
+    public static void MinNumCalling(TextBox[,] OriginalArray)
+    {
+        if (DataAnalyser.Checker(OriginalArray))
+        {
+            OpenResultWindow(FinderProcesor.MinFinder(OriginalArray).ToString());
+        }
+        else
+        {
+            MessageBox.Show("Error");
         }
     }
 
-    public static void MaxFunc(int startRow, int startColumn, int endRow, int endColumn)
+    //.......................... Методи виклику текстових операцій .........................//
+
+
+    public static TextBox[,] LowerCaseCaller(TextBox[,] OriginalArray)
     {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        if (DataAnalyser.CheckerForString(OriginalArray))
         {
-            var result = DataProcesor.FindMaxValue(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
-            OpenResultWindow(result.Text);
+            return TextTransformerProcesor.lowerCaseConverter(OriginalArray);
+        }
+        else
+        {
+            MessageBox.Show("Error");
+            return OriginalArray;
+        }
+
+    }
+
+    public static TextBox[,] UpperCaseCaller(TextBox[,] OriginalArray)
+    {
+        if (DataAnalyser.CheckerForString(OriginalArray))
+        {
+            return TextTransformerProcesor.upperCaseConverter(OriginalArray);
+        }
+        else
+        {
+            MessageBox.Show("Error");
+            return OriginalArray;
+        }
+
+    }
+
+    public static TextBox[,] AbcSorterCalling(TextBox[,] OriginalArray)
+    {
+        if (DataAnalyser.CheckerForString(OriginalArray))
+        {
+            return TextSorterProcesor.AbcSorter(OriginalArray);
+        }
+        else
+        {
+            MessageBox.Show("Error");
+            return OriginalArray;
         }
     }
 
-    public static void AvarageFunc(int startRow, int startColumn, int endRow, int endColumn)
+    public static TextBox[,] LengthSorterCalling(TextBox[,] OriginalArray)
     {
-        if (DataAnalyser.AreValuesNumeric(MainWindow.GetTextBoxes(), endRow, endColumn))
+        if (DataAnalyser.CheckerForString(OriginalArray))
         {
-            var result = DataProcesor.CalculateAverage(MainWindow.GetTextBoxes(), startRow, startColumn, endRow, endColumn);
-            OpenResultWindow(result.ToString());
+            return TextSorterProcesor.LengthSorter(OriginalArray);
         }
-    }
-
-    
-
-    public static void DisplayArray(TextBox[,] array, int rows, int columns)
-    {
-        // Call the SortArray function to sort the array
-        TextBox[,] sortedArray = array;
-
-        // Build a string to display the sorted array
-        StringBuilder resultMessage = new StringBuilder();
-        resultMessage.AppendLine("Sorted Array:");
-
-        for (int i = 1; i <= rows; i++)
+        else
         {
-            for (int j = 1; j <= columns; j++)
-            {
-                resultMessage.Append(sortedArray[i, j].Text + "\t");
-            }
-            resultMessage.AppendLine();
+            MessageBox.Show("Error");
+            return OriginalArray;
         }
 
-        // Display the result in a MessageBox
-        MessageBox.Show(resultMessage.ToString(), "Sorted Array");
     }
+
+    public static TextBox[,] SearchByWord(TextBox[,] OriginalArray,string Parametr)
+    {
+        if (DataAnalyser.CheckerForString(OriginalArray))
+        {
+            return TextTransformerProcesor.WordSearcher(OriginalArray,Parametr);
+        }
+        else
+        {
+            MessageBox.Show("Error");
+            return OriginalArray;
+        }
+
+    }
+
 }
+
+

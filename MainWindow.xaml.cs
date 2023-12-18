@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.DirectoryServices;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -30,7 +31,12 @@ namespace MiniExcel
         {
             InitializeComponent();
             textBoxArray = new TextBox[11, 11];
-            AddRowAction(); 
+            initStartScreen();
+        }
+
+        private void initStartScreen() 
+        {
+            AddRowAction();
             AddRowAction();
             AddColumnAction();
             AddColumnAction();
@@ -120,12 +126,6 @@ namespace MiniExcel
         }
 
 
-
-        private void ShowPopUpWindow()
-        {
-
-        }
-
         private void AddColumn(object sender, RoutedEventArgs e)
         {
             AddColumnAction();
@@ -144,7 +144,6 @@ namespace MiniExcel
                 return;
             }
 
-            // Додаємо новий рядок
             RowDefinition newRowDefinition = new RowDefinition();
             ItemContainer.RowDefinitions.Add(newRowDefinition);
 
@@ -153,7 +152,6 @@ namespace MiniExcel
                 textBoxArray = new TextBox[ItemContainer.RowDefinitions.Count, ItemContainer.ColumnDefinitions.Count];
             }
 
-            // Додаємо Label для нумерації рядків
             Label headerLabel = new Label
             {
                 Content = (ItemContainer.RowDefinitions.Count - 1).ToString(), // Нумерація з 1
@@ -166,7 +164,6 @@ namespace MiniExcel
             Grid.SetRow(headerLabel, ItemContainer.RowDefinitions.Count - 1);
             ItemContainer.Children.Add(headerLabel);
 
-            // Додаємо текстбокси в кожну комірку нового рядка
             for (int i = 1; i < ItemContainer.ColumnDefinitions.Count; i++)
             {
                 TextBox newTextBox = new TextBox
@@ -180,7 +177,6 @@ namespace MiniExcel
 
                 ItemContainer.Children.Add(newTextBox);
 
-                //Додаємо текстбокс в масив по відповідних координатах
                 textBoxArray[i, ItemContainer.RowDefinitions.Count - 1] = newTextBox;
             }
         }
@@ -192,7 +188,6 @@ namespace MiniExcel
                 MessageBox.Show("Maximum number of columns (10) reached.", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            // Додаємо новий стовбець
             ColumnDefinition newColumn = new ColumnDefinition();
             ItemContainer.ColumnDefinitions.Add(newColumn);
 
@@ -200,11 +195,9 @@ namespace MiniExcel
             {
                 textBoxArray = new TextBox[ItemContainer.RowDefinitions.Count, ItemContainer.ColumnDefinitions.Count];
             }
-
-            // Додаємо Label для нумерації стовбців
             Label headerLabel = new Label
             {
-                Content = (ItemContainer.ColumnDefinitions.Count - 1).ToString(), // Нумерація з 1
+                Content = (ItemContainer.ColumnDefinitions.Count - 1).ToString(), 
                 Width = 30,
                 Height = 30,
                 HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -214,7 +207,6 @@ namespace MiniExcel
             Grid.SetRow(headerLabel, 0);
             ItemContainer.Children.Add(headerLabel);
 
-            // Додаємо текстбокси в кожну комірку нового стовбця
             for (int i = 1; i < ItemContainer.RowDefinitions.Count; i++)
             {
                 TextBox newTextBox = new TextBox
@@ -228,7 +220,6 @@ namespace MiniExcel
 
                 ItemContainer.Children.Add(newTextBox);
 
-                //Додаємо текстбокс в масив по відповідних координатах
                 textBoxArray[ItemContainer.ColumnDefinitions.Count - 1, i] = newTextBox;
             }
         }
@@ -243,21 +234,33 @@ namespace MiniExcel
             return textBoxArray;
         }
 
-        public static void SetTextBoxes(TextBox[,] newTextBoxArray, int startRow, int startColumn, int endRow, int endColumn)
+        public static TextBox[,] GetTextBoxesArray() 
         {
-            int rows = newTextBoxArray.GetLength(0);
-            int columns = newTextBoxArray.GetLength(1);
+            return textBoxArray;
+        }
 
-            // Ensure that the dimensions match
+        public static void SetTextBox(TextBox[,] UpdatedTextBox)
+        {
+            int rows = UpdatedTextBox.GetLength(0);
+            int columns = UpdatedTextBox.GetLength(1);
+
+
+
             if (rows == textBoxArray.GetLength(0) && columns == textBoxArray.GetLength(1))
             {
-                for (int i = startRow; i <= endRow; i++)
+                for (int i = 1; i <= FieldManipulator.UpdateFieldCoordinates[3]; i++)
                 {
-                    for (int j = startColumn; j <= endColumn; j++)
+                    for (int j = 1; j <= FieldManipulator.UpdateFieldCoordinates[2]; j++)
                     {
-                        if (newTextBoxArray[i, j] != null)
+                        if (UpdatedTextBox[i, j] != null)
                         {
-                            textBoxArray[i, j].Text = newTextBoxArray[i, j].Text;
+                            textBoxArray[i, j].Text = UpdatedTextBox[i, j].Text;
+                            Debug.Print(textBoxArray[i, j].Text);
+                        }
+                        else 
+                        {
+                            MessageBox.Show("pf");
+
                         }
                     }
                 }
@@ -265,14 +268,45 @@ namespace MiniExcel
             else
             {
                 MessageBox.Show("Dimensions do not match.");
-                // Handle a case where the dimensions do not match (optional)
-                // You may choose to throw an exception or handle it differently based on your requirements
+   
             }
         }
 
-        
+        private void removeColumnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemContainer.ColumnDefinitions.Count > 0)
+            {
+                int columnIndexToRemove = ItemContainer.ColumnDefinitions.Count - 1;
+                ItemContainer.ColumnDefinitions.RemoveAt(columnIndexToRemove);
+
+                foreach (UIElement child in ItemContainer.Children)
+                {
+                    if (Grid.GetColumn(child) == columnIndexToRemove)
+                    {
+                        ItemContainer.Children.Remove(child);
+                        break; 
+                    }
+                }
+            }
+        }
+
+        private void removeRowBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemContainer.RowDefinitions.Count > 0)
+            {
+                int rowIndexToRemove = ItemContainer.RowDefinitions.Count - 1;
+                ItemContainer.RowDefinitions.RemoveAt(rowIndexToRemove);
+
+                foreach (UIElement child in ItemContainer.Children)
+                {
+                    if (Grid.GetRow(child) == rowIndexToRemove)
+                    {
+                        ItemContainer.Children.Remove(child);
+                        break; 
+                    }
+                }
+            }
+        }
+
     }
 }
-
-
-

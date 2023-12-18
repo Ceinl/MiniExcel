@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public static class DataProcesor
 {
@@ -24,10 +26,108 @@ public static class DataProcesor
                 sortedArray[i, j] = sortedArray[minIndex / (endColumn + 1), minIndex % (endColumn + 1)];
                 sortedArray[minIndex / (endColumn + 1), minIndex % (endColumn + 1)] = temp;
             }
+            
         }
 
         return sortedArray;
     }
+
+    public static TextBox[,] NormalSortArr(TextBox[,] array)
+    {
+        int[] sortArr = ConvertTo1DArray(array);
+
+        if (sortArr == null) 
+        {
+            MessageBox.Show("SortArr is null");
+        }
+
+        Array.Sort(sortArr);
+
+        // Update the original array with the sorted values
+        int rows = array.GetLength(0);
+        int columns = array.GetLength(1);
+
+        int index = 0;
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                // Assuming the TextBox contains integers
+                array[i, j].Text = sortArr[index].ToString();
+                index++;
+            }
+        }
+
+        return array;
+    }
+
+
+    public static TextBox[,] MoveContentDownRight(TextBox[,] array)
+    {
+        int rows = array.GetLength(0);
+        int columns = array.GetLength(1);
+
+        // Create a copy of the original array to avoid overwriting values during the shift
+        TextBox[,] newArray = new TextBox[rows, columns];
+        Array.Copy(array, newArray, array.Length);
+
+        // Shift elements down and right
+        for (int i = rows - 2; i >= 0; i--)
+        {
+            for (int j = columns - 2; j >= 0; j--)
+            {
+                newArray[i + 1, j + 1].Text = array[i, j].Text;
+            }
+        }
+
+        // Clear the first row and column
+        for (int i = 0; i < rows; i++)
+        {
+            newArray[i, 0].Text = "";
+        }
+
+        for (int j = 0; j < columns; j++)
+        {
+            newArray[0, j].Text = "";
+        }
+
+        return newArray;
+    }
+
+
+
+
+    private static int[] ConvertTo1DArray(TextBox[,] originalArray)
+    {
+        int rows = originalArray.GetLength(0);
+        int columns = originalArray.GetLength(1);
+
+        int[] flattenedArray = new int[rows * columns];
+
+        int index = 0;
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                // Assuming the TextBox contains integers; if not, you may need to parse the Text property
+                if (int.TryParse(originalArray[i, j].Text, out int value))
+                {
+                    flattenedArray[index] = value;
+                    index++;
+                }
+                // If TextBox doesn't contain integers, handle accordingly
+                // else {
+                //    // Handle non-integer values
+                // }
+            }
+        }
+
+        return flattenedArray;
+    }
+
+
+
+
 
     private static int FindMinIndex(TextBox[,] array, int startRow, int startColumn, int endRow, int endColumn)
     {
