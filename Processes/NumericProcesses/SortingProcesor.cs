@@ -16,14 +16,7 @@ namespace MiniExcel
             int[] LinedArray = FieldManipulator.ConvertTo1DArray(originalArray);
 
             Array.Sort(LinedArray);
-            string test = "";
-            for (int i = 0; i < LinedArray.Length; i++) 
-            {
-                test += LinedArray[i].ToString();
-            }
-
-            MessageBox.Show(test);
-
+          
             return FieldManipulator.ConvertTo2DArray(LinedArray);
         }
 

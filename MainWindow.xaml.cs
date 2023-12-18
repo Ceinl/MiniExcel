@@ -234,11 +234,6 @@ namespace MiniExcel
             return textBoxArray;
         }
 
-        public static TextBox[,] GetTextBoxesArray() 
-        {
-            return textBoxArray;
-        }
-
         public static void SetTextBox(TextBox[,] UpdatedTextBox)
         {
             int rows = UpdatedTextBox.GetLength(0);

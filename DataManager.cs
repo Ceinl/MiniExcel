@@ -101,11 +101,11 @@ public static class DataManager
 
     public static TextBox[,] UpperCaseCaller(TextBox[,] OriginalArray)
     {
-        if (DataAnalyser.CheckerForString(OriginalArray))
+       // if (DataAnalyser.CheckerForString(OriginalArray))
         {
             return TextTransformerProcesor.upperCaseConverter(OriginalArray);
         }
-        else
+      //  else
         {
             MessageBox.Show("Error");
             return OriginalArray;

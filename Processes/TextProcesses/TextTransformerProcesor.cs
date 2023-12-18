@@ -39,12 +39,15 @@ namespace MiniExcel
         {
             string[] LinedArray = FieldManipulator.ConvertToString1DArray(OriginalTextBox);
 
+            
             for (int i = 0; i < LinedArray.Length; i++) 
             {
-                if (LinedArray[i].Contains(SearchedWord));
+                
+                if (LinedArray[i].Contains(SearchedWord)) 
                 {
                     LinedArray[i] = LinedArray[i].ToUpper();
                 }
+
             }
             MessageBox.Show("Table cells with searched word transformed to upper case");
          return FieldManipulator.ConvertTo2DArray(LinedArray);

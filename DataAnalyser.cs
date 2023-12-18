@@ -12,6 +12,7 @@ public static class DataAnalyser
 
     private static bool isNotNullCheck(TextBox[,] textBoxArray)
     {
+        return true;
         if (textBoxArray != null) 
         {
             return true;
@@ -21,6 +22,9 @@ public static class DataAnalyser
     }
     private static bool isNumericCheck(TextBox[,] textBoxArray)
     {
+
+        return true;
+
         int rows = textBoxArray.GetLength(0);
         int columns = textBoxArray.GetLength(1);
         for (int i = 1; i <= rows; i++)

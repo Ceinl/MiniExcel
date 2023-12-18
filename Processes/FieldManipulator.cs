@@ -127,7 +127,7 @@ namespace MiniExcel
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    resultArray[j, i] = new TextBox
+                    resultArray[i,j] = new TextBox
                     {
                         Text = flattenedArray[index]
                     };

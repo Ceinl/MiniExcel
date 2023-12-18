@@ -259,7 +259,7 @@ namespace MiniExcel
         public void searchContent()
         {
             InputContent();
-            CreateTextbox("Searched content", 1, 1);
+            CreateTextbox("_", 1, 1);
         }
         // TEXT ACTION
 
