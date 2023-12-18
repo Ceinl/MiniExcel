@@ -224,15 +224,20 @@ namespace MiniExcel
         public void AvarageAction(object sender, RoutedEventArgs e)
         {
             DataManager.AvarageNumCalling(SplitTextBox());
+            Close();
 
         }
         public void MinAction(object sender, RoutedEventArgs e)
         {
             DataManager.MinNumCalling(SplitTextBox());
+            Close();
+
         }
         public void MaxAction(object sender, RoutedEventArgs e)
         {
             DataManager.MaxNumCalling(SplitTextBox());
+            Close();
+
         }
 
 

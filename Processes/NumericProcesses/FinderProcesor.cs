@@ -15,7 +15,7 @@ namespace MiniExcel
         {
             int[] LinedArray = FieldManipulator.ConvertTo1DArray(OriginalTextBox);
             int minValue = 0;
-            if (LinedArray.Length < 0) 
+            if (LinedArray.Length > 0) 
             {
 
                 minValue = LinedArray[0];
@@ -33,14 +33,17 @@ namespace MiniExcel
 
             int[] LinedArray = FieldManipulator.ConvertTo1DArray(OriginalTextBox);
             int maxValue = 0;
-            if (LinedArray.Length < 0)
+            if (LinedArray.Length > 0)
             {
 
                 maxValue = LinedArray[0];
 
-                for (int i = 0; i > LinedArray.Length; i++)
+                for (int i = 0; i < LinedArray.Length; i++)
                 {
-                    if (LinedArray[i] < maxValue) { maxValue = LinedArray[i]; }
+                    if (LinedArray[i] > maxValue)
+                    { 
+                        maxValue = LinedArray[i];
+                    }
                 }
             }
 
