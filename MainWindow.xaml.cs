@@ -269,7 +269,7 @@ namespace MiniExcel
 
         private void removeColumnBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (ItemContainer.ColumnDefinitions.Count > 0)
+            if (ItemContainer.ColumnDefinitions.Count > 3)
             {
                 int columnIndexToRemove = ItemContainer.ColumnDefinitions.Count - 1;
                 ItemContainer.ColumnDefinitions.RemoveAt(columnIndexToRemove);
@@ -287,7 +287,7 @@ namespace MiniExcel
 
         private void removeRowBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (ItemContainer.RowDefinitions.Count > 0)
+            if (ItemContainer.RowDefinitions.Count > 3)
             {
                 int rowIndexToRemove = ItemContainer.RowDefinitions.Count - 1;
                 ItemContainer.RowDefinitions.RemoveAt(rowIndexToRemove);
